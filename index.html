@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QR-Code generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rubik', sans-serif;
+        }
+
+        .wrapper, .result {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .text {
+            width: 80vh;
+            height: 30vh;
+            padding: 2vh;
+            font-size: 2vh;
+            border: none;
+            resize: none;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            outline: none;
+            background: #F5F9FF;
+            box-shadow: inset 0px 0px 30px rgba(194, 193, 193, 0.61);
+            transition: 0.3s;
+        }
+
+        .text:focus {
+            box-shadow: inset 0px 0px 30px rgba(194, 193, 193, 0.61), 0px 10px 10px rgba(166, 175, 195, 1);
+            transform: scale(1.02);
+        }
+
+        .wrapper {
+            background: #F5F9FF;
+            transition: 1s;
+        }
+
+        button {
+            height: 4vh;
+            padding: 0 6vh;
+            font-weight: 500;
+            font-size: 2vh;
+            box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.4);
+            background: white;
+            border: none;
+            margin: 2vh 0;
+            color: black;
+            border-radius: 4vh;
+            cursor: pointer;
+            transition: 0.2s
+        }
+
+        button:hover {
+            color: white;
+            background: #0e1f3f;
+            box-shadow: 0px 10px 10px rgba(166, 175, 195, 1);
+            transform: scale(1.1);
+        }
+
+        button:active {
+            transition: none;
+            background: white;
+            color: black;
+        }
+
+        .generator {
+            min-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin: 3vh 0;
+        }
+
+        .main {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .inner {
+            transition: 3s cubic-bezier(0.42, -0.48, 0.58, 1.05);
+        }
+
+        .generated {
+            transform: translateY(-100vh);
+        }
+
+        .madeby {
+            margin: 4vh 0;
+        }
+
+        .madeby a, .madeby a:visited {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="inner">
+        <div class="wrapper">
+            <div class="generator">
+                <h1>QR-Code Generator</h1>
+                <textarea class="text" placeholder="Enter text or URL"></textarea>
+                <button class="generate">Generate</button>
+            </div>
+        </div>
+        <div class="result">
+            <h1>This is your QR-Code</h1>
+            <div class="qr">
+            </div>
+            <button class="new">Make new</button>
+            <div class="madeby">
+                <a href="https://verhovna-rada.github.io/summary">Made by Bogdan Grishin</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <script>
+        const text = document.querySelector('.text')
+        const qr = document.querySelector('.qr')
+
+        document.querySelector('.generator button').addEventListener('click', () => {
+            if(text.value) {
+                qr.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=190x190&data=${text.value}">`
+                document.querySelector('.inner').classList.add('generated')
+            }
+        })
+        document.querySelector('.new').addEventListener('click', () => {
+            location.reload()
+        })
+    </script>
+</body>
+</html>
