@@ -134,7 +134,7 @@
 
         document.querySelector('.generator button').addEventListener('click', () => {
             if(text.value) {
-                qr.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${text.value}">`
+                qr.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=4 number is 3">`
                 document.querySelector('.inner').classList.add('generated')
             }
         })
